@@ -18,14 +18,90 @@ namespace ProjetoBanco
 
 
 
-        public void Depositar(double valor)
+
+        public void opcoesMenuCliente()
         {
-            Saldo = valor;
+            
+            Console.WriteLine("Digite 1 para exibir seu saldo");
+            Console.WriteLine("Digite 2 para depósito");
+            Console.WriteLine("Digite 3 para saque");
+
+            int opcao = int.Parse(Console.ReadLine());
+
+            switch (opcao)
+            {
+                case 1:
+                    ExibirSaldo();
+                    break;
+                case 2:
+                    Depositar();
+                    break;
+                case 3:
+                    Sacar();
+                    break;
+                default:
+                    Console.WriteLine("Opção inválida");
+                    break;
+            }
+
         }
 
-        public void Sacar(double valor)
+
+
+        public void ExibirSaldo()
         {
-            Saldo -= valor; 
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"O seu saldo é {Saldo} reais");
+            Console.ResetColor();
+            Console.WriteLine();
+            Console.WriteLine("Pressione qualquer tecla para retornar ao menu principal.");
+            Console.ReadKey();
+
+            Console.Clear();
+            opcoesMenuCliente(); 
+        }
+
+
+
+        public void Depositar()
+        {
+            Console.Clear();
+            Console.WriteLine("Digite o valor do depósito:");
+            double valorDeposito = double.Parse(Console.ReadLine());
+            Saldo += valorDeposito;
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Depósito realizado com sucesso!");
+            Console.ResetColor();
+            Console.WriteLine();
+
+        
+            Console.WriteLine("Pressione qualquer tecla para retornar ao menu principal.");
+            Console.ReadKey();
+
+            Console.Clear();
+            opcoesMenuCliente();
+
+        }
+
+        public void Sacar()
+        {
+            Console.Clear(); 
+            Console.WriteLine("Digite o valor do saque:");
+            double valorSaque = double.Parse(Console.ReadLine());
+            Saldo -= valorSaque;
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Saque realizado com sucesso!");
+            Console.ResetColor();
+            Console.WriteLine(); 
+
+            Console.WriteLine("Pressione qualquer tecla para retornar ao menu principal.");
+            Console.ReadKey();
+
+            Console.Clear();
+            opcoesMenuCliente();
         }
 
 

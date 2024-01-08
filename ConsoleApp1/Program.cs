@@ -11,7 +11,22 @@ namespace Banco
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("This is B-Five, your new bank!");
+            
+            
+            ExibirLogo();
+            Console.WriteLine();
+
+            App.Executar(); 
+
+
+
+            void ExibirLogo()
+            {
+                Console.WriteLine("\r\n░██████╗░█████╗░██╗░░░██╗██╗░░░░░██████╗░░█████╗░███╗░░██╗██╗░░██╗\r\n██╔════╝██╔══██╗██║░░░██║██║░░░░░██╔══██╗██╔══██╗████╗░██║██║░██╔╝\r\n╚█████╗░██║░░██║██║░░░██║██║░░░░░██████╦╝███████║██╔██╗██║█████═╝░\r\n░╚═══██╗██║░░██║██║░░░██║██║░░░░░██╔══██╗██╔══██║██║╚████║██╔═██╗░\r\n██████╔╝╚█████╔╝╚██████╔╝███████╗██████╦╝██║░░██║██║░╚███║██║░╚██╗\r\n╚═════╝░░╚════╝░░╚═════╝░╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝"); 
+            }
+
+
+            /* Console.WriteLine("Somos o Soulbank! O banco do seu sucesso!");
             Console.WriteLine("Para começar, fazer login como:");
             Console.WriteLine("Digite 1 para entrar como Administrador");
             Console.WriteLine("Digite 2 para entrar como Cliente");
@@ -21,7 +36,7 @@ namespace Banco
             if(opcao == "1")
             {
                 EntrarComoAdmin(); 
-            }if(opcao == "2")
+            }else if(opcao == "2")
             {
                 EntrarComoCliente();
             }
@@ -29,13 +44,17 @@ namespace Banco
             {
                 Console.WriteLine("Digite uma opção válida.");
                 Console.Clear();
-                //Main(args);
+                Main(args);
             }
 
 
 
             void EntrarComoAdmin()
             {
+
+
+                Console.Clear();
+
                 Console.Write("Digite o seu login: "); 
                 string login = Console.ReadLine();
 
@@ -49,76 +68,17 @@ namespace Banco
 
                     Console.WriteLine($"Welcome, {Contas.contaAdmin.Nome}. Select an option:");
 
-                    OpcoesMenuAdmin();
+                    Contas.contaAdmin.mostrarOpcoesMenuAdmin();
 
-
-
-                }
-            }
-
-            void OpcoesMenuAdmin()
-            {
-
-
-                Console.WriteLine("Digite 1 para cadastrar uma nova conta no sistema");
-                Console.WriteLine("Digite 2 para deletar uma conta do sistema");
-                Console.WriteLine("Digite 3 para listar todas as contas do sistema");
-                Console.WriteLine("Digite 0 para sair do sistema");
-
-
-                int numero; 
-                string entrada = Console.ReadLine();
-                if(int .TryParse(entrada, out numero))
-                {
-                    Console.WriteLine(numero);
-                }
-                //int opcaoEscolhida= int.Parse(Console.ReadLine());
-                //Console.WriteLine(opcaoEscolhida);
-
-                /* switch (opcaoEscolhida)
-                {
-                    case 1:
-                        Contas.ListarContas();   //Cadastrar();  
-                        break;
-                    case 2: Console.WriteLine("Programa encerrado");
-                        //DeletarConta();
-                        break;
-                    case 3: Console.WriteLine("oi");   //Contas.ListarContas(); 
-                        break;
-                    case 0: Console.WriteLine("Programa encerrado");
-                        break;
-                    default: Console.WriteLine("Invalid option");
-                        break;
-                } */
-
-
-            }
-
-
-            void Cadastrar()
-            {
-                Contas.contaAdmin.CadastrarNovaConta();
-
-                Console.Clear();
-
-                Console.WriteLine("Deseja cadastrar outro usuário? S/N");
-                char resposta = char.Parse(Console.ReadLine());
-                if (resposta == 'S')
-                {
-                    Console.Clear();
-                    Cadastrar();
-                    
 
 
                 }
                 else
                 {
                     Console.Clear();
-                    OpcoesMenuAdmin(); 
+                    Console.WriteLine("Sua conta não é válida. Tente novamente");
+                    EntrarComoAdmin(); 
                 }
-
-
-
             }
 
 
@@ -126,115 +86,46 @@ namespace Banco
            
             void EntrarComoCliente()
             {
-                Console.WriteLine("oi");
-            }
-
-            
-           /* void CadastrarNovaConta()
-            {
-                
-                Console.Clear();
-                Cadastrar();
-
-              
-
-                
                 Console.Clear();
 
-                Perguntar();
+                Console.WriteLine("Digite seu cpf");
+                string cpf  = Console.ReadLine();   
 
-                void Perguntar()
+                Console.WriteLine("Digite sua senha");
+                string senha = Console.ReadLine();
+
+               ContaCorrente conta = Contas.contasCorrentes.FirstOrDefault(conta => conta.Senha ==  senha && conta.Cpf == cpf);
+
+                if (conta != null)
                 {
+                    Console.Clear(); 
 
-                    Console.Clear();
+                    Console.WriteLine($"Welcome, {conta.Nome}. Escolha uma opção    :");
 
-                    Console.WriteLine("Conta registrada com sucesso!");
-                   
-                  
-                    Console.WriteLine("Deseja cadastrar outro usuário? S/N");
-                    char resposta = char.Parse(Console.ReadLine());
-                    if (resposta == 'S')
-                    {
-                        Console.Clear();
-                        Cadastrar();
-                        Perguntar(); 
+                    conta.opcoesMenuCliente();
 
 
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        ExibirOpcoesMenu();
-                    }
-
-
-                }
-           */
-
-            
-               /* void DeletarConta()
-                {
-                    Console.Clear();
-                    Console.WriteLine("Digite o CPF da conta que deseja deletar:");
-                    string cpfParaDeletar = Console.ReadLine();
-
-                    // Procura a conta na lista com o CPF fornecido
-                    ContaBase contaParaDeletar = contas.FirstOrDefault(conta => conta.Cpf == cpfParaDeletar);
-
-                    if (contaParaDeletar != null)
-                    {
-                        // Remove a conta da lista
-                        contas.Remove(contaParaDeletar);
-                        Console.WriteLine("Conta deletada com sucesso!");
-                        Console.WriteLine(contas.Count);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Conta não encontrada. Verifique o CPF digitado.");
-                    }
-
-                    Console.WriteLine("Pressione qualquer tecla para retornar ao menu principal.");
-                    Console.ReadKey();
-
-                    Console.Clear();
-                    ExibirOpcoesMenu();
-                } */ 
-
-
-            
-
-
-
-
-           /* void DeletarConta()
-            {
-                Console.Clear();
-                Console.WriteLine("Digite o CPF da conta que deseja deletar:");
-                string cpfParaDeletar = Console.ReadLine();
-
-
-                // Procura a conta na lista com o CPF fornecido
-                ContaBase contaParaDeletar = contas.FirstOrDefault(conta => conta.Cpf == cpfParaDeletar);
-
-                if (contaParaDeletar != null)
-                {
-                    // Remove a conta da lista
-                    contas.Remove(contaParaDeletar);
-                    Console.WriteLine("Conta deletada com sucesso!");
-                    Console.WriteLine(contas.Count);
                 }
                 else
                 {
-                    Console.WriteLine("Conta não encontrada. Verifique o CPF digitado.");
+                    Console.Clear();
+                    Console.WriteLine("Sua conta não é válida. Tente novamente");
+                    EntrarComoCliente(); 
                 }
 
-                Console.WriteLine("Pressione qualquer tecla para retornar ao menu principal.");
-                Console.ReadKey();
 
-                Console.Clear();
-                ExibirOpcoesMenu();
+               
 
-            } */
+
+
+
+            }*/
+
+            
+    
+
+            
+         
 
            
             

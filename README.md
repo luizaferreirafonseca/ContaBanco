@@ -1,5 +1,5 @@
 ## Projeto de Banco em C#
-Este é um projeto de banco desenvolvido em C# como parte do desafio de um curso da Udemy, ministrado por Nelio Alves. Este projeto foi desenvolvido no console e tem como objetivo praticar conceitos de Programação Orientada a Objetos, utilizando recursos como relação entre classes, herança, encapsulamento, membros estáticos, sobreposições e o uso de listas em C#.
+Este é um projeto de banco desenvolvido em C#. Este projeto foi desenvolvido no console e tem como objetivo praticar conceitos de Programação Orientada a Objetos, utilizando recursos como relação entre classes, herança, encapsulamento, membros estáticos, sobreposições e o uso de listas em C#.
 
 ## :wrench: Funcionalidades
 
